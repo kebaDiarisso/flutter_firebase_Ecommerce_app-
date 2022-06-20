@@ -4,7 +4,7 @@ import 'package:myapp/signUp.dart';
 
 void main() {
   runApp(const MyApp());
-}
+} //tuto 3 6m53
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);

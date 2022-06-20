@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:myapp/signUp.dart';
+import 'package:myapp/widget/myButton.dart';
 
 class Login extends StatefulWidget {
   const Login({Key? key}) : super(key: key);
@@ -89,19 +90,10 @@ class _LoginState extends State<Login> {
                           ),
                           hintStyle: TextStyle(color: Colors.black)),
                     ),
-                    Container(
-                      height: 45,
-                      width: double.infinity,
-                      child: ElevatedButton(
-                          style: ButtonStyle(
-                            backgroundColor:
-                                MaterialStateProperty.all(Colors.blueGrey[400]),
-                          ),
-                          onPressed: () {
-                            validation();
-                          },
-                          child: Text("Login")),
-                    ),
+                   ///// Button
+                  MyButton(
+                    name: "Login", onPressed: (){validation();}
+                  ),
                     Row(
                       children: [
                         Text("I have Not Account !"),
