@@ -12,6 +12,7 @@ String p =
     r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
 
 RegExp regExp = RegExp(p);
+bool obserText=true;
 
 class _SignUpState extends State<SignUp> {
   void validation() {
@@ -94,6 +95,7 @@ class _SignUpState extends State<SignUp> {
                           ),
                         ),
                         TextFormField(
+                          obscureText: obserText,
                           validator: (value) {
                             if (value == "") {
                               return "Please Fill Password";
@@ -103,16 +105,21 @@ class _SignUpState extends State<SignUp> {
                             return "";
                           },
                           decoration: InputDecoration(
-                            hintText: "Passord",
+
+                            hintText: "Password",
                             hintStyle: const TextStyle(
                               color: Colors.black,
                             ),
                             suffixIcon: GestureDetector(
                                 onTap: () {
+                                  setState(() {
+                                    obserText = !obserText;
+                                  });
                                   FocusScope.of(context).unfocus();
                                 },
-                                child: const Icon(
-                                  Icons.visibility,
+                                child: Icon(
+                                  obserText==true? Icons.visibility:Icons.visibility_off,
+                                 // Icons.visibility,
                                   color: Colors.black,
                                 )),
                             border: const OutlineInputBorder(),
