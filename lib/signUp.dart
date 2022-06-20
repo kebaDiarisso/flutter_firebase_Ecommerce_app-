@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:myapp/login.dart';
 
 class SignUp extends StatefulWidget {
   const SignUp({Key? key}) : super(key: key);
@@ -12,7 +13,7 @@ String p =
     r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
 
 RegExp regExp = RegExp(p);
-bool obserText=true;
+bool obserText = true;
 
 class _SignUpState extends State<SignUp> {
   void validation() {
@@ -105,7 +106,6 @@ class _SignUpState extends State<SignUp> {
                             return "";
                           },
                           decoration: InputDecoration(
-
                             hintText: "Password",
                             hintStyle: const TextStyle(
                               color: Colors.black,
@@ -118,8 +118,10 @@ class _SignUpState extends State<SignUp> {
                                   FocusScope.of(context).unfocus();
                                 },
                                 child: Icon(
-                                  obserText==true? Icons.visibility:Icons.visibility_off,
-                                 // Icons.visibility,
+                                  obserText == true
+                                      ? Icons.visibility
+                                      : Icons.visibility_off,
+                                  // Icons.visibility,
                                   color: Colors.black,
                                 )),
                             border: const OutlineInputBorder(),
@@ -159,10 +161,17 @@ class _SignUpState extends State<SignUp> {
                         Row(
                           children: [
                             const Text("I Have Already An Account!"),
-                            SizedBox(
+                            const SizedBox(
                               width: 10,
                             ),
                             GestureDetector(
+                              onTap: () {
+                                Navigator.of(context).pushReplacement(
+                                  MaterialPageRoute(
+                                    builder: (ctx) => const Login(),
+                                  ),
+                                );
+                              },
                               child: const Text(
                                 'Login',
                                 style: TextStyle(
