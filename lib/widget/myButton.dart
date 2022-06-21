@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 class MyButton extends StatelessWidget {
-  final Function onPressed;
+  //final Function onPressed;
+  final VoidCallback onPressed;
   final String name;
   MyButton({required this.name, required this.onPressed});
 
@@ -14,8 +15,8 @@ class MyButton extends StatelessWidget {
           style: ButtonStyle(
             backgroundColor: MaterialStateProperty.all(Colors.blueGrey[400]),
           ),
-        //  onPressed: onPressed(),
-        onPressed:(){},
+          onPressed: onPressed,
+        //onPressed:(){},
           child: Text(name)),
     );
   }

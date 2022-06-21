@@ -3,14 +3,16 @@ import 'package:flutter/material.dart';
 import '../login.dart';
 
 class ChangeScreen extends StatelessWidget {
-  late final String name;
+  late final String whichAccount;
   late final Function onTap;
+  final String name;
 
+ChangeScreen({required this.name, required this.onTap,required this.whichAccount});
   @override
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Text("I Have Hot Account !"),
+        Text(whichAccount),
         SizedBox(
           width: 10,
         ),
@@ -22,8 +24,8 @@ class ChangeScreen extends StatelessWidget {
               ),
             );
           },
-          child: const Text(
-            'Login',
+          child:  Text(
+            name,
             style: TextStyle(
                 color: Colors.cyan, fontSize: 15, fontWeight: FontWeight.bold),
           ),

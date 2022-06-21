@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:myapp/login.dart';
+import 'package:myapp/widget/changementScreens.dart';
 import 'package:myapp/widget/myButton.dart';
+
+import 'widget/mytextFormField.dart';
+import 'widget/passwordFormField.dart';
 
 class SignUp extends StatefulWidget {
   const SignUp({Key? key}) : super(key: key);
@@ -24,6 +28,101 @@ class _SignUpState extends State<SignUp> {
     } else {
       print("no");
     }
+  }
+
+  Widget _buildAllTextFormField() {
+    return Container(
+      height: 330,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          MyTextFormField(
+            name: "userName",
+            validator: (value) {
+              if (value == "") {
+                return "Please Fill UserName";
+              } else if (value!.length < 6) {
+                return "UserName Is Too Short";
+              }
+              return "";
+            },
+          ),
+          MyTextFormField(
+            name: "Login",
+            validator: (value) {
+              if (value == "") {
+                return "Please Fill Email";
+              } else if (!regExp.hasMatch(value!)) {
+                return "Email Is Invalid";
+              }
+              return "";
+            },
+          ),
+          PasswordTextFormField(
+            validator: (value) {
+              if (value == "") {
+                return "Please Fill Password";
+              } else if (value!.length < 8) {
+                return "Password Is Too Short";
+              }
+              return "";
+            },
+            // onTap: () {
+            //   // FocusScope.of(context).unfocus();
+            //   // setState(() {R
+            //   //   obserText = !obserText;
+            //   // });
+            // },
+            name: "Password",
+            obserText: obserText,
+            onTap: (String? context) {},
+          ),
+          MyTextFormField(
+            name: "Phone Number",
+            validator: (value) {
+              if (value == "") {
+                return "Please Fill Phone Number";
+              } else if (value!.length < 9) {
+                return "phone Number Must Be 9";
+              }
+              return "";
+            },
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildBottomPart() {
+    return Container(
+      height: 400,
+      margin: const EdgeInsets.symmetric(horizontal: 10),
+      width: double.infinity,
+      //color: Colors.blue,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          _buildAllTextFormField(),
+          ////button
+          MyButton(
+              name: "SignUp",
+              onPressed: () {
+                validation();
+              }),
+          ChangeScreen(
+            name: "Login",
+            whichAccount: "I Have Already An Account !",
+            onTap: () {
+              Navigator.of(context).pushReplacement(
+                MaterialPageRoute(
+                  builder: (ctx) =>  Login(),
+                ),
+              );
+            },
+          ),
+        ],
+      ),
+    );
   }
 
   @override
@@ -54,129 +153,7 @@ class _SignUpState extends State<SignUp> {
                   const SizedBox(
                     height: 20,
                   ),
-                  Container(
-                    height: 400,
-                    margin: const EdgeInsets.symmetric(horizontal: 10),
-                    width: double.infinity,
-                    //color: Colors.blue,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        TextFormField(
-                          validator: (value) {
-                            if (value == "") {
-                              return "Please Fill UserName";
-                            } else if (value!.length < 6) {
-                              return "UserName Is Too Short";
-                            }
-                            return "";
-                          },
-                          decoration: const InputDecoration(
-                            hintText: "UserName",
-                            hintStyle: TextStyle(
-                              color: Colors.black,
-                            ),
-                            border: OutlineInputBorder(),
-                          ),
-                        ),
-                        TextFormField(
-                          validator: (value) {
-                            if (value == "") {
-                              return "Please Fill Email";
-                            } else if (!regExp.hasMatch(value!)) {
-                              return "Email Is Invalid";
-                            }
-                            return "";
-                          },
-                          decoration: const InputDecoration(
-                            hintText: "Email",
-                            hintStyle: TextStyle(
-                              color: Colors.black,
-                            ),
-                            border: OutlineInputBorder(),
-                          ),
-                        ),
-                        TextFormField(
-                          obscureText: obserText,
-                          validator: (value) {
-                            if (value == "") {
-                              return "Please Fill Password";
-                            } else if (value!.length < 8) {
-                              return "Password Is Too Short";
-                            }
-                            return "";
-                          },
-                          decoration: InputDecoration(
-                            hintText: "Password",
-                            hintStyle: const TextStyle(
-                              color: Colors.black,
-                            ),
-                            suffixIcon: GestureDetector(
-                                onTap: () {
-                                  setState(() {
-                                    obserText = !obserText;
-                                  });
-                                  FocusScope.of(context).unfocus();
-                                },
-                                child: Icon(
-                                  obserText == true
-                                      ? Icons.visibility
-                                      : Icons.visibility_off,
-                                  // Icons.visibility,
-                                  color: Colors.black,
-                                )),
-                            border: const OutlineInputBorder(),
-                          ),
-                        ),
-                        TextFormField(
-                          validator: (value) {
-                            if (value == "") {
-                              return "Please Fill Phone Number";
-                            } else if (value!.length < 9) {
-                              return "phone Number Must Be 9";
-                            }
-                            return "";
-                          },
-                          decoration: const InputDecoration(
-                            hintText: "Phone Number",
-                            // icon: Icon(Icons.phone),
-                            hintStyle: TextStyle(
-                              color: Colors.black,
-                            ),
-                            border: OutlineInputBorder(),
-                          ),
-                        ),
-                        ////button
-                        MyButton(name: "SignUp", onPressed: (){
-                          validation();
-                        }),
-                        Row(
-                          children: [
-                            const Text("I Have Already An Account!"),
-                            const SizedBox(
-                              width: 10,
-                            ),
-                            GestureDetector(
-                              onTap: () {
-                                Navigator.of(context).pushReplacement(
-                                  MaterialPageRoute(
-                                    builder: (ctx) => const Login(),
-                                  ),
-                                );
-                              },
-                              child: const Text(
-                                'Login',
-                                style: TextStyle(
-                                    color: Colors.cyan,
-                                    fontSize: 15,
-                                    fontWeight: FontWeight.bold),
-                              ),
-                            )
-                          ],
-                        )
-                      ],
-                    ),
-                  )
+                  _buildBottomPart(),
                 ],
               ),
             ),
